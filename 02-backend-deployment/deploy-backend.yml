@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-backend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: shop-backend-label
+  template:
+    metadata:
+      labels:
+        app: shop-backend-label
+    spec:
+      containers:
+      - name: shop-backend
+        image: registry.gitlab.com/codelab-kubernetes/apps/shop-backend:no-database
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 8080

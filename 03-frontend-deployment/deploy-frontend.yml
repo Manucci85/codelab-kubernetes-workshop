@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shop-frontend-label
+  template:
+    metadata:
+      labels:
+        app: shop-frontend-label
+    spec:
+      containers:
+      - name: shop-frontend
+        image: registry.gitlab.com/codelab-kubernetes/apps/shop-frontend:latest
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
